@@ -46,12 +46,6 @@ import axios from 'axios'
       return errObj
     }
    
-    // useEffect(() => {
-    //   dispatch({
-    //     type: actionTypes.TEST_API
-    //   })
-    // }, [])
-   
     const registerUser = async() => {
       if (!Object.keys(validate()).length) {
         const url = 'http://evntz-node-api-ra-ie.ap-south-1.elasticbeanstalk.com/authentication/registration';
