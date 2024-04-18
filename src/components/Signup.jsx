@@ -27,7 +27,7 @@ import axios from 'axios'
       organiser: false
     })
     const [error, setError] = useState({})
-   // http://evntz-node-api-ra-ie.ap-south-1.elasticbeanstalk.com/authentication/registration   .
+   // http://evntz-node-api-ra-ie.ap-south-1.elasticbeanstalk.com/authentication/registration.
     const validate = () => {
       const errObj = {}
       if (!userDetails.fullName) {
