@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import './MealDB.css'; // Import custom CSS file
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import Navbar from './Navbar';
+import { Grid } from '@mui/material';
 
 const MealDB = () => {
   const [query, setQuery] = useState('');
@@ -40,8 +42,8 @@ const MealDB = () => {
   };
 
   useEffect(() => {
-    // Check if there is an active session
-    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    // Check if the user is logged in by checking session storage
+    const isLoggedIn = localStorage.getItem('sessionId');
     if (!isLoggedIn) {
       // If not logged in, redirect to the login page
       navigate('/login');
@@ -49,8 +51,8 @@ const MealDB = () => {
       // If logged in, fetch data
       fetchData();
     }
-  }, [navigate]); // Include navigate in the dependency array
-
+  }, []); // Include navigate in the dependency array to ensure it's available
+ 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
@@ -60,10 +62,13 @@ const MealDB = () => {
   }
 
   return (
+    <>
+                            <Navbar />
     <Container>
+
       <h1>MealDB Recipe Search</h1>
-      <Form onSubmit={fetchData}>
-        <Form.Group controlId="formQuery">
+      <Form onSubmit={fetchData} style={{display: 'flex'}}>
+        <Form.Group controlId="formQuery" style={{width: '60%'}}>
           <Form.Label>Search Query</Form.Label>
           <Form.Control
             type="text"
@@ -72,11 +77,12 @@ const MealDB = () => {
             onChange={handleQueryChange}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary"  style={{width: '10%', padding: '10px', height: '40px', margin: 30}} type="submit">
           Search
         </Button>
       </Form>
       {meal && (
+        <Grid container >
         <Row>
           <Col md={6}>
             <div className="meal-card-content">
@@ -88,6 +94,7 @@ const MealDB = () => {
               <h2>{meal.strMeal}</h2>
               <Card.Body>
                 <Card.Title>Ingredients</Card.Title>
+                
                 <ul>
                   {Object.entries(meal)
                     .filter(([key, value]) => key.startsWith('strIngredient') && value)
@@ -105,9 +112,11 @@ const MealDB = () => {
             </div>
           </Col>
         </Row>
+        </Grid>
       )}
     </Container>
-  );
+    </>
+);
 };
 
 export default MealDB;

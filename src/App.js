@@ -1,28 +1,30 @@
-// App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes component
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Login from './components/Login';
-import CalorieTracker from './components/BMI';
-import MealDB from './components/MealDB'; // Import the MealDB component
 import Home from './components/Home';
+import CalorieTracker from './components/BMI';
+import MealDB from './components/MealDB';
+import NewLogin from './components/NewLogin';
+import { Container } from '@mui/material';
+import SignUp from './components/Signup';
 
 function App() {
   return (
+    <Container>
     <Router>
       <div>
-        <Navbar />
-        <Routes> {/* Wrap your routes with <Routes> */}
-          <Route path="/" element={<Home/>} />
-          <Route path="/login" element={<Login />} />
+        <Routes> 
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<NewLogin />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/BMI" element={<CalorieTracker />} />
-          {/* Add Route for MealDB component */}
-          <Route path="/meal-db" element={<MealDB />} />
+          <Route path="/meal-db" element={<MealDB />} /> 
         </Routes>
         <Footer />
       </div>
     </Router>
+    </Container>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import Navbar from './Navbar';
 
 const Home = () => {
   const [height, setHeight] = useState('');
@@ -14,12 +15,12 @@ const Home = () => {
 
   useEffect(() => {
     // Check if the user is logged in by checking session storage
-    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    const isLoggedIn = localStorage.getItem('sessionId');
     if (!isLoggedIn) {
       // If not logged in, redirect to the login page
       navigate('/login');
     }
-  }, [navigate]); // Include navigate in the dependency array to ensure it's available
+  }, []); // Include navigate in the dependency array to ensure it's available
 
   const fetchData = async () => {
     try {
@@ -47,7 +48,10 @@ const Home = () => {
   };
 
   return (
+    <>
+                  <Navbar />
     <div className="container mt-5">
+
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card">
@@ -107,6 +111,8 @@ const Home = () => {
         </div>
       )}
     </div>
+    </>
+
   );
 };
 

@@ -6,12 +6,12 @@ const Navbar = () => {
 
   const handleLogout = () => {
     // Perform logout actions (e.g., clear session storage)
-    sessionStorage.removeItem('isLoggedIn'); // Remove the isLoggedIn key from session storage
+    localStorage.removeItem('sessionId'); // Remove the isLoggedIn key from session storage
     window.location.href = '/login'; // Redirect to the login page
   };
 
   // Check if the user is logged in
-  const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+  const isLoggedIn = localStorage.getItem('sessionId');
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

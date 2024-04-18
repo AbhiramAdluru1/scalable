@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const BMI = () => {
     const [weight, setWeight] = useState('');
@@ -11,7 +12,7 @@ const BMI = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        const isLoggedIn = localStorage.getItem('sessionId');
         if (!isLoggedIn) {
             navigate('/login');
         }
@@ -44,7 +45,8 @@ const BMI = () => {
         e.preventDefault();
     };
 
-    return (
+    return (<>
+                                <Navbar />
         <div className="container mt-5">
             <h1>BMI Calculator</h1>
             <Form onSubmit={handleSubmit}>
@@ -70,6 +72,8 @@ const BMI = () => {
                 </div>
             )}
         </div>
+        </>
+
     );
 };
 
